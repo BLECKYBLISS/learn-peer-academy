@@ -208,19 +208,19 @@ const TutorRegistration = () => {
               <h4 className="font-semibold text-blue-800 mb-2">Blockchain Benefits</h4>
               <div className="space-y-1 text-sm text-blue-700">
                 <div className="flex items-center space-x-2">
-                  <Badge variant="outline" size="sm">✓</Badge>
+                  <Badge variant="outline">✓</Badge>
                   <span>Immutable reputation system</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Badge variant="outline" size="sm">✓</Badge>
+                  <Badge variant="outline">✓</Badge>
                   <span>Secure escrow payments</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Badge variant="outline" size="sm">✓</Badge>
+                  <Badge variant="outline">✓</Badge>
                   <span>Decentralized credential verification</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Badge variant="outline" size="sm">✓</Badge>
+                  <Badge variant="outline">✓</Badge>
                   <span>Global accessibility</span>
                 </div>
               </div>
