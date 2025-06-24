@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, Users, BookOpen, Shield, Wallet, Clock, MapPin } from 'lucide-react';
+import { Star, Users, BookOpen, Shield, Wallet, Clock, MapPin, Sparkles, Award, TrendingUp } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import TutorRegistration from '@/components/TutorRegistration';
 import SessionBooking from '@/components/SessionBooking';
@@ -146,37 +146,43 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-screen gradient-hero">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50">
+      <header className="glass sticky top-0 z-50 border-b border-white/20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-white" />
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center shadow-elegant">
+                <BookOpen className="w-6 h-6 text-white" />
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold text-gradient-primary">
                 NovaLink
               </h1>
+              <Badge variant="outline" className="hidden md:flex bg-white/10 border-white/20 text-primary">
+                <Sparkles className="w-3 h-3 mr-1" />
+                Beta
+              </Badge>
             </div>
             <div className="flex items-center space-x-4">
-              <Badge variant="outline" className="hidden md:flex">
+              <Badge variant="outline" className="hidden lg:flex glass border-white/20 text-foreground/80">
                 <Shield className="w-3 h-3 mr-1" />
                 Secured by Blockchain
               </Badge>
               {isWalletConnected ? (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-3">
                   <Button
                     variant="outline"
-                    className="flex items-center space-x-2"
+                    className="glass border-white/20 hover:bg-white/10 flex items-center space-x-2"
                   >
-                    <Wallet className="w-4 h-4 text-green-600" />
-                    <span>{formatAddress(walletAddress)}</span>
+                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse-soft"></div>
+                    <Wallet className="w-4 h-4 text-primary" />
+                    <span className="font-medium">{formatAddress(walletAddress)}</span>
                   </Button>
                   <Button
                     onClick={disconnectWallet}
                     variant="ghost"
                     size="sm"
+                    className="hover:bg-white/10"
                   >
                     Disconnect
                   </Button>
@@ -185,9 +191,9 @@ const Index = () => {
                 <Button
                   onClick={connectWallet}
                   disabled={isConnecting}
-                  className="flex items-center space-x-2"
+                  className="gradient-primary text-white shadow-elegant hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
-                  <Wallet className="w-4 h-4" />
+                  <Wallet className="w-4 h-4 mr-2" />
                   <span>{isConnecting ? 'Connecting...' : 'Connect Wallet'}</span>
                 </Button>
               )}
@@ -196,105 +202,146 @@ const Index = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-12">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-            Decentralized Learning Platform
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/20">
+            <Award className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-foreground/80">Decentralized Learning Platform</span>
+          </div>
+          
+          <h2 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-gradient-primary">Learn</span> Without
+            <br />
+            <span className="text-foreground">Boundaries</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+          
+          <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto mb-12 leading-relaxed">
             Connect with expert tutors worldwide. Secure payments with cryptocurrency tokens. 
             Build your reputation in the decentralized education ecosystem.
           </p>
           
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-8">
-            <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 border">
-              <div className="text-2xl font-bold text-blue-600">500+</div>
-              <div className="text-gray-600">Expert Tutors</div>
+          {/* Enhanced Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+            <div className="glass-card rounded-2xl p-8 shadow-soft hover-lift">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl gradient-primary mb-4 mx-auto">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-3xl font-bold text-primary mb-2">500+</div>
+              <div className="text-foreground/70 font-medium">Expert Tutors</div>
+              <div className="text-sm text-foreground/50 mt-1">Verified & Rated</div>
             </div>
-            <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 border">
-              <div className="text-2xl font-bold text-green-600">10k+</div>
-              <div className="text-gray-600">Sessions Completed</div>
+            
+            <div className="glass-card rounded-2xl p-8 shadow-soft hover-lift">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-accent mb-4 mx-auto">
+                <BookOpen className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-3xl font-bold text-accent mb-2">10k+</div>
+              <div className="text-foreground/70 font-medium">Sessions Completed</div>
+              <div className="text-sm text-foreground/50 mt-1">With 99% Success Rate</div>
             </div>
-            <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 border">
-              <div className="text-2xl font-bold text-purple-600">4.8★</div>
-              <div className="text-gray-600">Average Rating</div>
+            
+            <div className="glass-card rounded-2xl p-8 shadow-soft hover-lift">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 mb-4 mx-auto">
+                <TrendingUp className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent mb-2">4.8★</div>
+              <div className="text-foreground/70 font-medium">Average Rating</div>
+              <div className="text-sm text-foreground/50 mt-1">Exceptional Quality</div>
             </div>
           </div>
         </div>
 
         {/* Wallet Connection Notice */}
         {!isWalletConnected && (
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8 text-center">
-            <div className="flex items-center justify-center space-x-2 text-amber-800">
-              <Wallet className="w-5 h-5" />
-              <span className="font-medium">Connect your wallet to access all features</span>
+          <div className="glass-card rounded-2xl p-6 mb-12 text-center border border-amber-200/30 bg-amber-50/20">
+            <div className="flex items-center justify-center space-x-3 text-amber-700">
+              <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
+                <Wallet className="w-4 h-4 text-amber-600" />
+              </div>
+              <span className="font-medium text-lg">Connect your wallet to unlock all features</span>
             </div>
           </div>
         )}
 
         {/* Main Platform */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full max-w-2xl mx-auto mb-8">
-            <TabsTrigger value="browse">Browse Tutors</TabsTrigger>
-            <TabsTrigger value="register">Become a Tutor</TabsTrigger>
-            <TabsTrigger value="booking">Book Session</TabsTrigger>
-            <TabsTrigger value="reputation">Reviews</TabsTrigger>
-            <TabsTrigger value="escrow">Payments</TabsTrigger>
+          <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full max-w-3xl mx-auto mb-12 glass border-white/20 p-2 h-auto">
+            <TabsTrigger value="browse" className="rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 data-[state=active]:shadow-elegant">
+              Browse Tutors
+            </TabsTrigger>
+            <TabsTrigger value="register" className="rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 data-[state=active]:shadow-elegant">
+              Become a Tutor
+            </TabsTrigger>
+            <TabsTrigger value="booking" className="rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 data-[state=active]:shadow-elegant">
+              Book Session
+            </TabsTrigger>
+            <TabsTrigger value="reputation" className="rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 data-[state=active]:shadow-elegant">
+              Reviews
+            </TabsTrigger>
+            <TabsTrigger value="escrow" className="rounded-xl py-3 px-4 text-sm font-medium transition-all duration-300 data-[state=active]:shadow-elegant">
+              Payments
+            </TabsTrigger>
           </TabsList>
 
           {/* Browse Tutors */}
-          <TabsContent value="browse" className="space-y-6">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-semibold mb-2">Find Your Perfect Tutor</h3>
-              <p className="text-gray-600">Browse verified tutors and book sessions instantly</p>
+          <TabsContent value="browse" className="space-y-8">
+            <div className="text-center mb-8">
+              <h3 className="text-3xl font-bold mb-4 text-gradient-primary">Find Your Perfect Tutor</h3>
+              <p className="text-lg text-foreground/70">Browse verified tutors and book sessions instantly</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {mockTutors.map((tutor) => (
-                <Card key={tutor.id} className="group hover:shadow-lg transition-all duration-300 bg-white/70 backdrop-blur-sm border-0 shadow-md">
-                  <CardHeader className="text-center">
-                    <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden ring-4 ring-blue-100 group-hover:ring-blue-200 transition-all">
-                      <img src={tutor.image} alt={tutor.name} className="w-full h-full object-cover" />
+                <Card key={tutor.id} className="group glass-card rounded-2xl border-white/20 shadow-soft hover-lift overflow-hidden">
+                  <CardHeader className="text-center pb-4">
+                    <div className="relative">
+                      <div className="w-24 h-24 rounded-2xl mx-auto mb-4 overflow-hidden ring-4 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
+                        <img src={tutor.image} alt={tutor.name} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-accent flex items-center justify-center">
+                        <div className="w-2 h-2 rounded-full bg-white animate-pulse-soft"></div>
+                      </div>
                     </div>
-                    <CardTitle className="text-lg">{tutor.name}</CardTitle>
-                    <CardDescription className="flex items-center justify-center space-x-1">
+                    <CardTitle className="text-xl font-bold">{tutor.name}</CardTitle>
+                    <CardDescription className="flex items-center justify-center space-x-2 text-primary">
                       <BookOpen className="w-4 h-4" />
-                      <span>{tutor.subject}</span>
+                      <span className="font-medium">{tutor.subject}</span>
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                  <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-1">
+                      <div className="flex items-center space-x-2">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="font-medium">{tutor.rating}</span>
-                        <span className="text-gray-500">({tutor.reviews})</span>
+                        <span className="font-bold text-lg">{tutor.rating}</span>
+                        <span className="text-foreground/60">({tutor.reviews})</span>
                       </div>
-                      <Badge variant={tutor.availability === 'Available' ? 'default' : 'secondary'}>
+                      <Badge variant={tutor.availability === 'Available' ? 'default' : 'secondary'} 
+                             className={tutor.availability === 'Available' ? 'bg-accent text-white' : ''}>
                         {tutor.availability}
                       </Badge>
                     </div>
                     
-                    <div className="space-y-2 text-sm text-gray-600">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4" />
+                    <div className="space-y-3 text-sm text-foreground/70">
+                      <div className="flex items-center space-x-3">
+                        <Clock className="w-4 h-4 text-primary" />
                         <span>{tutor.experience} experience</span>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4" />
+                      <div className="flex items-center space-x-3">
+                        <MapPin className="w-4 h-4 text-primary" />
                         <span>{tutor.location}</span>
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between pt-3 border-t">
-                      <div className="text-lg font-bold text-green-600">
+                    <div className="flex items-center justify-between pt-4 border-t border-white/20">
+                      <div className="text-xl font-bold text-accent">
                         {tutor.hourlyRate} ETH/hr
                       </div>
                       <Button 
                         size="sm" 
                         disabled={tutor.availability === 'Busy' || !isWalletConnected}
                         onClick={() => setActiveTab('booking')}
+                        className="gradient-primary text-white shadow-elegant hover:shadow-lg transition-all duration-300 hover:scale-105"
                       >
                         Book Now
                       </Button>
@@ -310,17 +357,14 @@ const Index = () => {
             <TutorRegistration />
           </TabsContent>
 
-          {/* Session Booking */}
           <TabsContent value="booking">
             <SessionBooking />
           </TabsContent>
 
-          {/* Reputation System */}
           <TabsContent value="reputation">
             <ReputationSystem />
           </TabsContent>
 
-          {/* Escrow Payment */}
           <TabsContent value="escrow">
             <EscrowPayment />
           </TabsContent>
