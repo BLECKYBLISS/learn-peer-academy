@@ -1,14 +1,21 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, Users, BookOpen, Shield, Wallet, Clock, MapPin } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
 import TutorRegistration from '@/components/TutorRegistration';
 import SessionBooking from '@/components/SessionBooking';
 import ReputationSystem from '@/components/ReputationSystem';
 import EscrowPayment from '@/components/EscrowPayment';
+
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
 
 const mockTutors = [
   {
@@ -52,11 +59,90 @@ const mockTutors = [
 const Index = () => {
   const [activeTab, setActiveTab] = useState('browse');
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState('');
+  const [isConnecting, setIsConnecting] = useState(false);
+  const { toast } = useToast();
 
-  const connectWallet = () => {
-    // Mock wallet connection
-    setIsWalletConnected(true);
-    console.log('Connecting to Lisk wallet...');
+  // Check if wallet is already connected on component mount
+  useEffect(() => {
+    checkWalletConnection();
+  }, []);
+
+  const checkWalletConnection = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        if (accounts.length > 0) {
+          setIsWalletConnected(true);
+          setWalletAddress(accounts[0]);
+        }
+      } catch (error) {
+        console.error('Error checking wallet connection:', error);
+      }
+    }
+  };
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum === 'undefined') {
+      toast({
+        title: "MetaMask Not Found",
+        description: "Please install MetaMask to connect your wallet.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsConnecting(true);
+    
+    try {
+      // Request account access
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
+
+      if (accounts.length > 0) {
+        setIsWalletConnected(true);
+        setWalletAddress(accounts[0]);
+        
+        toast({
+          title: "Wallet Connected",
+          description: `Connected to ${accounts[0].substring(0, 6)}...${accounts[0].substring(accounts[0].length - 4)}`,
+        });
+
+        console.log('MetaMask wallet connected:', accounts[0]);
+      }
+    } catch (error: any) {
+      console.error('Error connecting wallet:', error);
+      
+      if (error.code === 4001) {
+        toast({
+          title: "Connection Rejected",
+          description: "Please connect your wallet to use NovaLink.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Connection Failed",
+          description: "Failed to connect to MetaMask. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  const disconnectWallet = () => {
+    setIsWalletConnected(false);
+    setWalletAddress('');
+    toast({
+      title: "Wallet Disconnected",
+      description: "Your wallet has been disconnected.",
+    });
+  };
+
+  const formatAddress = (address: string) => {
+    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
 
   return (
@@ -76,16 +162,35 @@ const Index = () => {
             <div className="flex items-center space-x-4">
               <Badge variant="outline" className="hidden md:flex">
                 <Shield className="w-3 h-3 mr-1" />
-                Secured by Lisk
+                Secured by Blockchain
               </Badge>
-              <Button
-                onClick={connectWallet}
-                variant={isWalletConnected ? "outline" : "default"}
-                className="flex items-center space-x-2"
-              >
-                <Wallet className="w-4 h-4" />
-                <span>{isWalletConnected ? 'Wallet Connected' : 'Connect Wallet'}</span>
-              </Button>
+              {isWalletConnected ? (
+                <div className="flex items-center space-x-2">
+                  <Button
+                    variant="outline"
+                    className="flex items-center space-x-2"
+                  >
+                    <Wallet className="w-4 h-4 text-green-600" />
+                    <span>{formatAddress(walletAddress)}</span>
+                  </Button>
+                  <Button
+                    onClick={disconnectWallet}
+                    variant="ghost"
+                    size="sm"
+                  >
+                    Disconnect
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  onClick={connectWallet}
+                  disabled={isConnecting}
+                  className="flex items-center space-x-2"
+                >
+                  <Wallet className="w-4 h-4" />
+                  <span>{isConnecting ? 'Connecting...' : 'Connect Wallet'}</span>
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -98,7 +203,7 @@ const Index = () => {
             Decentralized Learning Platform
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-            Connect with expert tutors worldwide. Secure payments with LSK tokens. 
+            Connect with expert tutors worldwide. Secure payments with cryptocurrency tokens. 
             Build your reputation in the decentralized education ecosystem.
           </p>
           
@@ -118,6 +223,16 @@ const Index = () => {
             </div>
           </div>
         </div>
+
+        {/* Wallet Connection Notice */}
+        {!isWalletConnected && (
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8 text-center">
+            <div className="flex items-center justify-center space-x-2 text-amber-800">
+              <Wallet className="w-5 h-5" />
+              <span className="font-medium">Connect your wallet to access all features</span>
+            </div>
+          </div>
+        )}
 
         {/* Main Platform */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -174,11 +289,11 @@ const Index = () => {
                     
                     <div className="flex items-center justify-between pt-3 border-t">
                       <div className="text-lg font-bold text-green-600">
-                        {tutor.hourlyRate} LSK/hr
+                        {tutor.hourlyRate} ETH/hr
                       </div>
                       <Button 
                         size="sm" 
-                        disabled={tutor.availability === 'Busy'}
+                        disabled={tutor.availability === 'Busy' || !isWalletConnected}
                         onClick={() => setActiveTab('booking')}
                       >
                         Book Now
