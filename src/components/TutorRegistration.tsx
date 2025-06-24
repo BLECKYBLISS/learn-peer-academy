@@ -110,14 +110,78 @@ const TutorRegistration = () => {
                       <SelectValue placeholder="Select your subject" />
                     </SelectTrigger>
                     <SelectContent>
+                      {/* Core Academic Subjects */}
                       <SelectItem value="mathematics">Mathematics</SelectItem>
+                      <SelectItem value="algebra">Algebra</SelectItem>
+                      <SelectItem value="calculus">Calculus</SelectItem>
+                      <SelectItem value="geometry">Geometry</SelectItem>
+                      <SelectItem value="statistics">Statistics</SelectItem>
                       <SelectItem value="physics">Physics</SelectItem>
                       <SelectItem value="chemistry">Chemistry</SelectItem>
-                      <SelectItem value="computer-science">Computer Science</SelectItem>
-                      <SelectItem value="english">English</SelectItem>
-                      <SelectItem value="history">History</SelectItem>
                       <SelectItem value="biology">Biology</SelectItem>
+                      <SelectItem value="computer-science">Computer Science</SelectItem>
+                      <SelectItem value="programming">Programming</SelectItem>
+                      <SelectItem value="data-science">Data Science</SelectItem>
+                      <SelectItem value="web-development">Web Development</SelectItem>
+                      
+                      {/* Languages */}
+                      <SelectItem value="english">English</SelectItem>
+                      <SelectItem value="english-literature">English Literature</SelectItem>
+                      <SelectItem value="creative-writing">Creative Writing</SelectItem>
+                      <SelectItem value="spanish">Spanish</SelectItem>
+                      <SelectItem value="french">French</SelectItem>
+                      <SelectItem value="german">German</SelectItem>
+                      <SelectItem value="italian">Italian</SelectItem>
+                      <SelectItem value="portuguese">Portuguese</SelectItem>
+                      <SelectItem value="mandarin">Mandarin Chinese</SelectItem>
+                      <SelectItem value="japanese">Japanese</SelectItem>
+                      <SelectItem value="korean">Korean</SelectItem>
+                      <SelectItem value="arabic">Arabic</SelectItem>
+                      <SelectItem value="russian">Russian</SelectItem>
+                      <SelectItem value="hindi">Hindi</SelectItem>
+                      
+                      {/* Social Sciences */}
+                      <SelectItem value="history">History</SelectItem>
+                      <SelectItem value="geography">Geography</SelectItem>
                       <SelectItem value="economics">Economics</SelectItem>
+                      <SelectItem value="political-science">Political Science</SelectItem>
+                      <SelectItem value="psychology">Psychology</SelectItem>
+                      <SelectItem value="sociology">Sociology</SelectItem>
+                      <SelectItem value="philosophy">Philosophy</SelectItem>
+                      
+                      {/* Arts & Humanities */}
+                      <SelectItem value="art">Art & Drawing</SelectItem>
+                      <SelectItem value="music">Music</SelectItem>
+                      <SelectItem value="music-theory">Music Theory</SelectItem>
+                      <SelectItem value="piano">Piano</SelectItem>
+                      <SelectItem value="guitar">Guitar</SelectItem>
+                      <SelectItem value="violin">Violin</SelectItem>
+                      <SelectItem value="photography">Photography</SelectItem>
+                      <SelectItem value="graphic-design">Graphic Design</SelectItem>
+                      
+                      {/* Business & Finance */}
+                      <SelectItem value="accounting">Accounting</SelectItem>
+                      <SelectItem value="finance">Finance</SelectItem>
+                      <SelectItem value="business">Business Studies</SelectItem>
+                      <SelectItem value="marketing">Marketing</SelectItem>
+                      <SelectItem value="entrepreneurship">Entrepreneurship</SelectItem>
+                      
+                      {/* Test Prep */}
+                      <SelectItem value="sat-prep">SAT Preparation</SelectItem>
+                      <SelectItem value="act-prep">ACT Preparation</SelectItem>
+                      <SelectItem value="gmat-prep">GMAT Preparation</SelectItem>
+                      <SelectItem value="gre-prep">GRE Preparation</SelectItem>
+                      <SelectItem value="toefl-prep">TOEFL Preparation</SelectItem>
+                      <SelectItem value="ielts-prep">IELTS Preparation</SelectItem>
+                      
+                      {/* Specialized Skills */}
+                      <SelectItem value="cooking">Cooking & Culinary Arts</SelectItem>
+                      <SelectItem value="fitness">Fitness & Personal Training</SelectItem>
+                      <SelectItem value="yoga">Yoga & Meditation</SelectItem>
+                      <SelectItem value="chess">Chess</SelectItem>
+                      <SelectItem value="public-speaking">Public Speaking</SelectItem>
+                      <SelectItem value="study-skills">Study Skills & Organization</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -152,7 +216,7 @@ const TutorRegistration = () => {
                   id="education"
                   value={formData.education}
                   onChange={(e) => handleInputChange('education', e.target.value)}
-                  placeholder="e.g., PhD in Mathematics, MIT"
+                  placeholder="e.g., PhD in Mathematics, MIT or Native Spanish Speaker, Certified Language Teacher"
                   required
                 />
               </div>
