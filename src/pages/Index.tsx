@@ -169,6 +169,9 @@ const Index = () => {
               <h1 className="text-4xl font-bold text-gradient-primary">
                 NovaLink
               </h1>
+              <span className="text-2xl font-bold text-gradient-primary ml-8">
+                dashboard
+              </span>
               <Badge variant="outline" className="hidden md:flex bg-white/10 border-white/20 text-primary">
                 <Sparkles className="w-3 h-3 mr-1" />
                 Beta
@@ -221,14 +224,11 @@ const Index = () => {
             <span className="text-sm font-medium text-foreground/80">Decentralized Learning Platform</span>
           </div>
           
-          {/* Logo and Dashboard Text */}
-          <div className="flex justify-center items-center mb-8 space-x-6">
+          {/* Logo Section */}
+          <div className="flex justify-center mb-8">
             <div className="w-32 h-32 gradient-primary rounded-3xl flex items-center justify-center shadow-2xl">
               <BookOpen className="w-16 h-16 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gradient-primary">
-              dashboard
-            </h2>
           </div>
           
           <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto mb-12 leading-relaxed">
