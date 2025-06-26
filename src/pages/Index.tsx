@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -161,10 +162,10 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center shadow-elegant">
-                <BookOpen className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center shadow-elegant">
+                <BookOpen className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-gradient-primary">
+              <h1 className="text-4xl font-bold text-gradient-primary">
                 NovaLink
               </h1>
               <Badge variant="outline" className="hidden md:flex bg-white/10 border-white/20 text-primary">
@@ -219,10 +220,15 @@ const Index = () => {
             <span className="text-sm font-medium text-foreground/80">Decentralized Learning Platform</span>
           </div>
           
+          {/* Enhanced Logo Section */}
+          <div className="flex justify-center mb-8">
+            <div className="w-32 h-32 gradient-primary rounded-3xl flex items-center justify-center shadow-2xl">
+              <BookOpen className="w-16 h-16 text-white" />
+            </div>
+          </div>
+          
           <h2 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-gradient-primary">Learn</span> Without
-            <br />
-            <span className="text-foreground">Boundaries</span>
+            <span className="text-gradient-primary">Dashboard</span>
           </h2>
           
           <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto mb-12 leading-relaxed">
