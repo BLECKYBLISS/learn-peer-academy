@@ -166,13 +166,15 @@ const Index = () => {
               <div className="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center shadow-elegant">
                 <BookOpen className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-4xl font-bold text-gradient-primary">
-                NovaLink
-              </h1>
-              <span className="text-2xl font-bold text-gradient-primary ml-8">
-                dashboard
-              </span>
-              <Badge variant="outline" className="hidden md:flex bg-white/10 border-white/20 text-primary">
+              <div className="flex flex-col">
+                <h1 className="text-4xl font-bold text-gradient-primary">
+                  NovaLink
+                </h1>
+                <span className="text-2xl font-bold text-gradient-primary mt-2">
+                  dashboard
+                </span>
+              </div>
+              <Badge variant="outline" className="hidden md:flex bg-white/10 border-white/20 text-primary ml-4">
                 <Sparkles className="w-3 h-3 mr-1" />
                 Beta
               </Badge>
@@ -390,4 +392,3 @@ const Index = () => {
 };
 
 export default Index;
-
