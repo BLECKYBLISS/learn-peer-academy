@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,7 @@ import TutorRegistration from '@/components/TutorRegistration';
 import SessionBooking from '@/components/SessionBooking';
 import ReputationSystem from '@/components/ReputationSystem';
 import EscrowPayment from '@/components/EscrowPayment';
+import OnboardingFlow from '@/components/OnboardingFlow';
 
 declare global {
   interface Window {
@@ -57,6 +57,7 @@ const mockTutors = [
 ];
 
 const Index = () => {
+  const [showOnboarding, setShowOnboarding] = useState(true);
   const [activeTab, setActiveTab] = useState('browse');
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState('');
@@ -144,6 +145,14 @@ const Index = () => {
   const formatAddress = (address: string) => {
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
+
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+  };
+
+  if (showOnboarding) {
+    return <OnboardingFlow onComplete={handleOnboardingComplete} />;
+  }
 
   return (
     <div className="min-h-screen gradient-hero">
